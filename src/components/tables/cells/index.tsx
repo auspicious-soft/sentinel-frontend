@@ -259,7 +259,7 @@ export const IconActionsCell: React.FC<{
       )}
       {onDelete && (
         <button onClick={onDelete} className="text-red-600 hover:text-red-800">
-          🗑️
+          🗑️ 
         </button>
       )}
     </div>
