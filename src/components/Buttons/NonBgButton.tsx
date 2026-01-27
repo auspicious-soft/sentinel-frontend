@@ -8,6 +8,7 @@ interface BtnProps {
   borderColor: string;
   textColor: string;
   icon?:boolean;
+  bgColor?:string;
 }
 
 export const NonBgButton: React.FC<BtnProps> = ({ 
@@ -16,11 +17,12 @@ export const NonBgButton: React.FC<BtnProps> = ({
   className = "",
   borderColor = "border-Black",
   textColor = "text-Black",
-  icon = false
+  icon = false,
+  bgColor = "bg-White",
 }) => {
   return (
     <div 
-      className={`self-stretch bg-white px-4 flex py-3 rounded-lg justify-around items-center border gap-4 ${borderColor} cursor-pointer ${className}` }
+      className={`self-stretch ${bgColor} px-4 flex py-3 rounded-lg justify-center items-center border gap-2 ${borderColor} cursor-pointer ${className}` }
       onClick={onClick}
       role="button"
     >

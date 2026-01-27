@@ -45,7 +45,7 @@ export const FieldRepTable = <T extends Record<string, any>>({
       width: 'flex-1',
     },
     {
-      key: 'phone',
+      key: 'phoneNumber',
       header: 'Phone',
       width: 'flex-1',
     },

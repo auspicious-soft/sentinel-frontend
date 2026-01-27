@@ -35,6 +35,10 @@ export type TableProps<T> = {
   onRowClick?: (row: T, index: number) => void;
   renderExpandedRow?: (row: T, index: number) => React.ReactNode;
   expandedRowIds?: (string | number)[];
+    getRowBgColor?: (row: T, rowIndex: number) => string | undefined;
+  defaultRowBgColor?: string;
+  stripedRowBgColor?: string;
+  stripedAlternateBgColor?: string;
 };
 
 export type CellType = 

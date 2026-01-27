@@ -93,7 +93,6 @@ export const DynamicSidebar: React.FC<DynamicSidebarProps> = ({ role, className 
 
   return (
     <>
-      {/* Mobile Menu Button */}
       { !isOpen &&
       <button
         onClick={toggleSidebar}
@@ -106,7 +105,7 @@ export const DynamicSidebar: React.FC<DynamicSidebarProps> = ({ role, className 
 
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+          className="lg:hidden fixed inset-0 backdrop-blur-3xl z-30"
           onClick={toggleSidebar}
         />
       )}
@@ -114,14 +113,14 @@ export const DynamicSidebar: React.FC<DynamicSidebarProps> = ({ role, className 
       <div
         className={`
           fixed lg:sticky top-0 left-0 h-screen
-          p-3 bg-light-blue rounded-[10px]
+          px-3 bg-light-blue rounded-[10px]
           transition-transform duration-300 ease-in-out
           z-40 
           ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
           ${className}
         `}
       >
-        <div className="inline-flex flex-col justify-start items-start gap-7 h-full">
+        <div className="inline-flex flex-col justify-start items-start gap-5 h-full">
           <div className="self-stretch inline-flex justify-between items-center">
             <Image
               src={logo}
@@ -136,7 +135,7 @@ export const DynamicSidebar: React.FC<DynamicSidebarProps> = ({ role, className 
           <div className="flex flex-col justify-start items-start gap-2.5 overflow-y-auto flex-1 w-full scrollbar-hide">
             <div className="flex flex-col justify-start items-start w-full">
               {navItems.map((item, index) => {
-                const isActive = pathname === item.path;
+const isActive = pathname === item.path || pathname.startsWith(item.path + '/');
                 return (
                   <Link
                     key={index}

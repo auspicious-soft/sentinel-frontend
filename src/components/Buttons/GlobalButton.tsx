@@ -6,6 +6,7 @@ interface BtnProps {
   className?: string;
   bgColor?: string;
   disabled?: boolean;
+  type?:string;
 }
 
 export const GlobalButton: React.FC<BtnProps> = ({ 
@@ -13,7 +14,8 @@ export const GlobalButton: React.FC<BtnProps> = ({
   onClick,
   className = "",
   bgColor = "bg-primary-red",
-  disabled = false
+  disabled = false,
+  type = "button"
 }) => {
   return (
     <div 
@@ -25,7 +27,7 @@ export const GlobalButton: React.FC<BtnProps> = ({
         ${className}
       `}
       onClick={disabled ? undefined : onClick}
-      role="button"
+      role={type}
       // aria-disabled={disabled}
     >
       <div className={`justify-center text-center text-sm font-medium font-['Plus_Jakarta_Sans']

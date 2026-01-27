@@ -31,7 +31,7 @@ export const DropdownField: React.FC<DropdownFieldProps> = ({
   name,
 }) => {
   return (
-    <div className={`self-stretch flex flex-col justify-start items-start gap-[5px] ${className}`}>
+    <div className={`self-stretch flex flex-col justify-start items-start gap-1.25 ${className}`}>
       {label && (
         <label className={FORM_LABELS}>
           {label}
@@ -39,7 +39,7 @@ export const DropdownField: React.FC<DropdownFieldProps> = ({
         </label>
       )}
       <div
-        className={`self-stretch h-14 px-3.5 py-2.5 rounded-[10px] outline outline-1 outline-offset-[-1px] outline-zinc-100 inline-flex justify-between items-center relative
+        className={`self-stretch h-14 px-3.5 py-2.5 rounded-[10px] -outline-offset-1 outline-zinc-100 inline-flex justify-between items-center relative
           ${disabled ? 'bg-zinc-100 cursor-not-allowed' : 'bg-white'}
         `}
       >

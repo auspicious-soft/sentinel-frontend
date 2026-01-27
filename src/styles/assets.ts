@@ -36,7 +36,7 @@ export const GRAPH_OPTS =
 export const GRAPH_HEADER =
   "text-[#FFFFFF] text-base font-semibold font-['Plus_Jakarta_Sans']";
 export const TABLE_HEADER =
-  "text-[#FFFFFF] text-sm font-medium font-['Plus_Jakarta_Sans'] leading-8";
+  "text-[#FFFFFF] text-sm font-medium font-['Plus_Jakarta_Sans']";
 export const TABLE_VALUES =  
 "text-[#464646] text-sm font-normal font-['Plus_Jakarta_Sans'] leading-8";
 export const FORM_LABELS = 
