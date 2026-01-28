@@ -17,6 +17,7 @@ interface DropdownFieldProps {
   required?: boolean;
   className?: string;
   name?: string;
+  dropdownHeight?:string;
 }
 
 export const DropdownField: React.FC<DropdownFieldProps> = ({
@@ -28,6 +29,7 @@ export const DropdownField: React.FC<DropdownFieldProps> = ({
   disabled = false,
   required = false,
   className = '',
+  dropdownHeight = '14',
   name,
 }) => {
   return (
@@ -39,7 +41,7 @@ export const DropdownField: React.FC<DropdownFieldProps> = ({
         </label>
       )}
       <div
-        className={`self-stretch h-14 px-3.5 py-2.5 rounded-[10px] -outline-offset-1 outline-zinc-100 inline-flex justify-between items-center relative
+        className={`self-stretch px-3.5 py-2.5 rounded-[10px] border border-[#E9E9E9] inline-flex justify-between items-center relative ${dropdownHeight ? `h-${dropdownHeight}` : "h-14"}
           ${disabled ? 'bg-zinc-100 cursor-not-allowed' : 'bg-white'}
         `}
       >

@@ -4,6 +4,9 @@ import Image from "next/image";
 import React, { useState } from "react";
 import eyeIcon from "../../../../public/icons/eye1.svg";
 import deleteIcon from "../../../../public/icons/redDelete.svg";
+import pencilIcon from "../../../../public/icons/pencil.svg";
+import galleryIcon from "../../../../public/icons/gallery.svg";
+import { DropdownField } from "@/components/Fields/DropdownField";
 
 export const ActionEyeCell: React.FC<{ onClick?: () => void }> = ({
   onClick,
@@ -33,6 +36,32 @@ export const DeleteEyeCell: React.FC<{ onClick?: () => void }> = ({
       >
         <div className="w-4 h-4 absolute overflow-hidden">
           <Image src={deleteIcon} alt={"delete"} width={16} height={16} />
+        </div>
+      </button>
+    </div>
+  );
+};
+
+export const EditDeleteCell: React.FC<{ onEditClick?: () => void, onDeleteClick?: () => void }> = ({
+  onEditClick,
+  onDeleteClick,
+}) => {
+  return (
+    <div className="flex justify-center items-center gap-2">
+      <button
+        onClick={onEditClick}
+        className="w-8 h-8 px-4 py-2 rounded-lg bg-primary-red backdrop-blur-[2.50px] flex justify-center items-center gap-2 cursor-pointer"
+      >
+        <div className="w-4 h-4 absolute overflow-hidden">
+          <Image src={pencilIcon} alt={"delete"} width={16} height={16} />
+        </div>
+      </button>
+      <button
+        onClick={onDeleteClick}
+        className="w-8 h-8 px-4 py-2 rounded-lg bg-primary-red backdrop-blur-[2.50px] flex justify-center items-center gap-2 cursor-pointer"
+      >
+        <div className="w-4 h-4 absolute overflow-hidden">
+          <Image src={galleryIcon} alt={"delete"} width={16} height={16} />
         </div>
       </button>
     </div>
@@ -71,18 +100,18 @@ export const DualActionTextCell: React.FC<{
    <div className="flex flex-col gap-1">
      <button
       onClick={onPrimaryClick}
-      className={`text-xs font-medium ${primaryTextColor} ${primaryUnderline ? "underline" : ""}`}
+      className={`text-sm font-medium ${primaryTextColor} ${primaryUnderline ? "underline" : ""}`}
       style={{  }}
     >
-      {primaryText}
+      <span className={`text-${primaryTextColor}`}>{primaryText}</span>
     </button>
     {secondaryText && (
      <button
       onClick={onSecondaryClick}
-      className={`text-xs font-medium ${secondaryTextColor} ${secondayUnderline ? "underline" : ""}`}
+      className={`text-sm font-medium ${secondaryTextColor} ${secondayUnderline ? "underline" : ""}`}
       // style={{ secondaryTextColor }}
     >
-      {secondaryText}
+      <span className={`text-${secondaryTextColor}`}>{secondaryText}</span>
     </button>
     )}
    </div>
@@ -160,18 +189,17 @@ export const DropdownCell: React.FC<{
   placeholder?: string;
 }> = ({ value, options, onChange, placeholder = "Select..." }) => {
   return (
-    <select
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className="px-3 py-2 bg-white rounded -outline-offset-1 outline-gray-200 flex justify-center items-center gap-2"
-    >
-      <option value="">{placeholder}</option>
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </select>
+   
+     <div className="w-full min-w-0">
+      <DropdownField
+        placeholder={placeholder}
+        value={value}
+        options={options}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full "
+        dropdownHeight="8"
+      />
+    </div>
   );
 };
 

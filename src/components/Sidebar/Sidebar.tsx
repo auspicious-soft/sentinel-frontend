@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { ChevronLeft, Menu, X } from 'lucide-react';
 import logo from '../../../public/images/logo.png';
 
 // Import all icons
@@ -121,7 +121,7 @@ export const DynamicSidebar: React.FC<DynamicSidebarProps> = ({ role, className 
         `}
       >
         <div className="inline-flex flex-col justify-start items-start gap-5 h-full">
-          <div className="self-stretch inline-flex justify-between items-center">
+          <div className="self-stretch inline-flex justify-between items-center ">
             <Image
               src={logo}
               alt="Logo"
@@ -130,6 +130,9 @@ export const DynamicSidebar: React.FC<DynamicSidebarProps> = ({ role, className 
               className="flex-1 h-20 object-contain mix-blend-multiply"
               priority
             />
+            <div className='w-7 h-7'>
+            <ChevronLeft className='w-7 h-7'/>
+            </div>
           </div>
 
           <div className="flex flex-col justify-start items-start gap-2.5 overflow-y-auto flex-1 w-full scrollbar-hide">
