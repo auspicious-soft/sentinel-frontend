@@ -1,9 +1,8 @@
 import React from 'react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { GlobalButton } from '../Buttons/GlobalButton';
 import { InputField } from '../Fields/InputField';
-import logo from '../../../public/images/logo1.png';
 import eyeOpen from '../../../public/icons/eyeOpen.svg';
 import eyeClose from '../../../public/icons/eyeClosed.svg';
 
@@ -33,6 +32,7 @@ interface AuthFormProps {
   bottomLinkText?: string;
   bottomLink?: string;
   isLoading?: boolean;
+  logoSrc?: string | StaticImageData;
   className?: string;
 }
 
@@ -49,6 +49,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
   bottomLinkText,
   bottomLink,
   isLoading = false,
+  logoSrc = '/images/logo1.png',
   className = '',
 }) => {
   const [showPasswords, setShowPasswords] = React.useState<Record<string, boolean>>({});
@@ -67,41 +68,39 @@ export const AuthForm: React.FC<AuthFormProps> = ({
 
   return (
     <div
-      className={`px-10 py-5 bg-white/70 rounded-[40px] -outline-offset-1 outline-zinc-200 inline-flex flex-col justify-start items-center gap-4 ${className}`}
+      className={`px-10 py-5 max-[500px]:px-6 max-[500px]:py-4 max-[350px]:px-4 max-[350px]:py-3 bg-white/70 rounded-[40px] max-[500px]:rounded-[20px] -outline-offset-1 outline-zinc-200 inline-flex flex-col justify-start items-center gap-4 ${className}`}
     >
       <Image
-        src={logo}
+        src={logoSrc}
         alt="Logo"
         width={206}
         height={73}
-        className="w-44 h-20 object-contain mix-blend-multiply"
+        className="w-44 h-20 max-[500px]:w-36 max-[500px]:h-16 max-[350px]:w-28 max-[350px]:h-12 object-contain mix-blend-multiply"
         priority
       />
 
-      <div className="w-96 max-w-96 flex flex-col justify-start items-start gap-7">
+      <div className="w-96 max-w-full flex flex-col justify-start items-start gap-7 max-[500px]:gap-5">
         <div className="self-stretch flex flex-col justify-center items-center gap-2.5">
-          <div className="w-80 text-center justify-center text-Selected text-3xl font-semibold font-['Plus_Jakarta_Sans'] tracking-tight">
+          <div className="w-full text-center justify-center text-Selected text-3xl max-[500px]:text-2xl max-[350px]:text-xl font-semibold font-['Plus_Jakarta_Sans'] tracking-tight px-2">
             {heading}
           </div>
           {subheading && (
-            <div className="self-stretch text-center justify-center text-Placeholder text-xs font-medium font-['Plus_Jakarta_Sans']">
+            <div className="self-stretch text-center justify-center text-Placeholder text-xs max-[350px]:text-[10px] font-medium font-['Plus_Jakarta_Sans'] px-2">
               {subheading}
             </div>
           )}
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="self-stretch flex flex-col justify-start items-center gap-5">
-          <div className="self-stretch flex flex-col justify-start items-start gap-3.5">
-            {/* Fields Container */}
-            <div className="self-stretch flex flex-col justify-start items-start gap-4">
+        <form onSubmit={handleSubmit} className="self-stretch flex flex-col justify-start items-center gap-5 max-[500px]:gap-4">
+          <div className="self-stretch flex flex-col justify-start items-start gap-3.5 max-[500px]:gap-3">
+            <div className="self-stretch flex flex-col justify-start items-start gap-4 max-[500px]:gap-3">
               {fields.map((field, index) => (
                 <div key={index} className="self-stretch inline-flex justify-start items-start gap-5">
                   <div className="flex-1 inline-flex flex-col justify-start items-start gap-1.25">
-                    <div className="self-stretch justify-center text-Paragraph text-xs font-normal font-['Plus_Jakarta_Sans']">
+                    <div className="self-stretch justify-center text-Paragraph text-xs max-[350px]:text-[10px] font-normal font-['Plus_Jakarta_Sans']">
                       {field.label}
                     </div>
-                    <div className="self-stretch px-3.5 py-2.5 bg-white/70 rounded-[10px] -outline-offset-1 outline-zinc-100 inline-flex justify-between items-center">
+                    <div className="self-stretch px-3.5 py-2.5 max-[500px]:px-3 max-[500px]:py-2 max-[350px]:px-2 max-[350px]:py-1.5 bg-white/70 rounded-[10px] -outline-offset-1 outline-zinc-100 inline-flex justify-between items-center">
                       <input
                         type={
                           field.type === 'password' && field.showPasswordToggle
@@ -115,23 +114,22 @@ export const AuthForm: React.FC<AuthFormProps> = ({
                         onChange={field.onChange}
                         placeholder={field.placeholder}
                         required={field.required}
-                        className="flex-1 bg-transparent outline-none text-Selected text-sm font-medium font-['Plus_Jakarta_Sans'] leading-8 placeholder:text-Placeholder"
+                        className="flex-1 bg-transparent outline-none text-Selected text-sm max-[350px]:text-xs font-medium font-['Plus_Jakarta_Sans'] leading-8 max-[350px]:leading-6 placeholder:text-Placeholder"
                       />
                       {field.type === 'password' && field.showPasswordToggle && (
-                     <button
-  type="button"
-  onClick={() => togglePasswordVisibility(field.name)}
-  className="w-8 h-8 relative shrink-0 ml-2 cursor-pointer"
->
-  <Image
-    src={showPasswords[field.name] ? eyeOpen : eyeClose}
-    alt="Toggle password visibility"
-    width={22}
-    height={22}
-    className='text-gray'
-  />
-</button>
-
+                        <button
+                          type="button"
+                          onClick={() => togglePasswordVisibility(field.name)}
+                          className="w-8 h-8 max-[350px]:w-6 max-[350px]:h-6 relative shrink-0 ml-2 cursor-pointer"
+                        >
+                          <Image
+                            src={showPasswords[field.name] ? eyeOpen : eyeClose}
+                            alt="Toggle password visibility"
+                            width={22}
+                            height={22}
+                            className="text-gray max-[350px]:w-4 max-[350px]:h-4"
+                          />
+                        </button>
                       )}
                     </div>
                   </div>
@@ -139,12 +137,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               ))}
             </div>
 
-            {/* Forgot Password Link */}
             {showForgotPassword && (
               <div className="self-stretch inline-flex justify-end items-start gap-2.5">
                 <Link
                   href={forgotPasswordLink}
-                  className="justify-center text-Selected text-xs font-medium font-['Plus_Jakarta_Sans'] hover:underline"
+                  className="justify-center text-Selected text-xs max-[350px]:text-[10px] font-medium font-['Plus_Jakarta_Sans'] hover:underline"
                 >
                   {forgotPasswordText}
                 </Link>
@@ -152,25 +149,25 @@ export const AuthForm: React.FC<AuthFormProps> = ({
             )}
           </div>
 
-          {/* Submit Button */}
           <GlobalButton
             text={buttonText}
             bgColor="bg-sky-800"
             disabled={isLoading}
-            className="w-full"
+            className="w-full text-sm max-[350px]:text-xs"
+            type="submit"
           />
         </form>
       </div>
 
       {bottomText && (
-        <div className="justify-start">
-          <span className="text-zinc-700 text-sm font-normal font-['Plus_Jakarta_Sans']">
+        <div className="justify-start text-center">
+          <span className="text-zinc-700 text-sm max-[350px]:text-xs font-normal font-['Plus_Jakarta_Sans']">
             {bottomText}{' '}
           </span>
           {bottomLinkText && bottomLink && (
             <Link
               href={bottomLink}
-              className="text-zinc-700 text-sm font-medium font-['Plus_Jakarta_Sans'] underline hover:no-underline"
+              className="text-zinc-700 text-sm max-[350px]:text-xs font-medium font-['Plus_Jakarta_Sans'] underline hover:no-underline"
             >
               {bottomLinkText}
             </Link>

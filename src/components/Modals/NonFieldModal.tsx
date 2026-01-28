@@ -28,7 +28,8 @@ export const NonFieldModal: React.FC<NonFieldModalProps> = ({
   className = ""
 }) => {
   return (
-    <div className={`w-full max-w-xl p-7 bg-white rounded-[30px] inline-flex flex-col justify-start items-center gap-7 ${className}`}>
+    <div className={`w-full max-w-xl p-7 max-[500px]:p-5 max-[350px]:p-4 mx-4 max-[500px]:mx-3 max-[350px]:mx-2 bg-white rounded-[30px] max-[500px]:rounded-[20px] inline-flex flex-col justify-start items-center gap-7 max-[500px]:gap-5 ${className}`}
+    >
       <div className="self-stretch flex flex-col justify-start items-center gap-5">
        {icon && (
           <div className="w-20-20 flex items-center justify-center relative">

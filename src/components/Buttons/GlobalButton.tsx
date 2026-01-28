@@ -18,8 +18,8 @@ export const GlobalButton: React.FC<BtnProps> = ({
   type = "button"
 }) => {
   return (
-    <div 
-      className={`self-stretch px-4 py-3 rounded-lg justify-center items-center transition-all
+    <button 
+      className={`self-stretch px-4 py-3 rounded-lg justify-center items-center transition-all w-full
         ${disabled 
           ? 'bg-gray-300 cursor-not-allowed ' 
           : `${bgColor} cursor-pointer `
@@ -35,6 +35,6 @@ export const GlobalButton: React.FC<BtnProps> = ({
       `}>
         {text}
       </div>
-    </div>
+    </button>
   );
 };

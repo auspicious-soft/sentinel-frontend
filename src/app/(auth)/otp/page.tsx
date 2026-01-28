@@ -20,7 +20,7 @@ const otpPage = () => {
     setIsLoading(true);
     try {
       console.log('Login:', formData);
-    
+      router.push("/create-password")
       await new Promise(resolve => setTimeout(resolve, 1500));
       
     } catch (error) {
@@ -43,7 +43,7 @@ const otpPage = () => {
 
       <div className="absolute inset-0 bg-black/10" />
 
-      <div className="relative z-10 min-h-screen w-full flex items-center justify-end right-10 p-4">
+    <div className="relative z-10 min-h-screen w-full flex items-center justify-end lg:pr-20 md:pr-10 px-4 max-[500px]:justify-center max-[500px]:px-4 max-[400px]:px-3 max-[350px]:px-2">
         <AuthForm
           heading="Enter OTP"
           subheading="Enter the one-time code sent to your registered email address."
@@ -67,6 +67,7 @@ const otpPage = () => {
           bottomLinkText="Contact Support"
           bottomLink="/support"
           isLoading={isLoading}
+           className="max-[500px]:scale-90 max-[400px]:scale-75 max-[320px]:scale-65"
         />
       </div>
     </div>

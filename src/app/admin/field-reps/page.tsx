@@ -142,30 +142,31 @@ const FieldReps = () => {
       <div className=" w-full bg-medium-blue h-full p-5 rounded-[10px] flex flex-col gap-4">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
           <span className={TAB_HEADER}>List of Field Reps</span>
-          <div className="flex flex-wrap gap-3 w-full xl:max-w-2xl">
-            <SearchInput
-              placeholder="Search company"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full sm:flex-1"
-            />
+<div className="flex gap-3 w-full xl:max-w-3xl flex-col sm:flex-row sm:flex-wrap">
+  <SearchInput
+    placeholder="Search company"
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    className="w-full sm:flex-1 "
+  />
 
-            <AddButton
-              text="Add New Field Rep"
-              icon
-              className="w-full sm:flex-1"
-              onClick={() => router.push("/admin/field-reps/add-new-field-rep")}
-            />
+  <AddButton
+    text="Add New Field Rep"
+    icon
+    className="w-full sm:flex-1"
+    onClick={() => router.push("/admin/field-reps/add-new-field-rep")}
+  />
 
-            <NonBgButton
-              text="Download Details"
-              borderColor="border-primary-red"
-              textColor="text-primary-red"
-              icon={true}
-              className="w-full sm:flex-1"
-              bgColor="bg-none"
-            />
-            <button className="border border-primary-red w-full sm:w-12 h-12 rounded-lg flex items-center justify-center cursor-pointer shrink-0">
+  <NonBgButton
+    text="Download Details"
+    borderColor="border-primary-red"
+    textColor="text-primary-red"
+    icon={true}
+    className="w-full sm:flex-1"
+    bgColor="bg-none"
+  />
+  
+  <button className="border border-primary-red w-full sm:w-12 h-12 rounded-lg flex items-center justify-center cursor-pointer">
               <Image
                 src={deleteIcon}
                 alt="Del"

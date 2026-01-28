@@ -225,7 +225,7 @@ const Page = () => {
         <div className="p-5 bg-medium-blue rounded-[10px] outline-white/20 backdrop-blur-[2.50px]">
           <div className="flex flex-col gap-5">
             {/* Header with Search and Add Button */}
-            <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
+            <div className="flex flex-col lg:flex-row justify-between items-start gap-4">
               <div className="text-Black-000 text-2xl font-semibold leading-8">
                 Company Users
               </div>

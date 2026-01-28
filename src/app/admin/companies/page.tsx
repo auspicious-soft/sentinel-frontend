@@ -114,9 +114,9 @@ const Companies = () => {
   return (
     <>
       <div className=" w-full bg-medium-blue h-full p-5 rounded-[10px] flex flex-col gap-4">
-        <div className="flex w-full justify-between">
+<div className="flex w-full justify-between items-start lg:items-center flex-col lg:flex-row gap-4 lg:gap-0">
           <span className={TAB_HEADER}>List of Companies</span>
-          <div className="flex gap-4 max-w-sm">
+<div className="flex gap-4 w-full lg:max-w-sm flex-col sm:flex-row">
             <AddButton
               text="Add New Company"
               icon

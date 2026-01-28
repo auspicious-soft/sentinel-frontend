@@ -18,9 +18,12 @@ const ForgetPasswordPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     setIsLoading(true);
+    if(!formData.email){
+      alert("Email required")
+    }
     try {
       console.log('Login:', formData);
-    
+      router.push("/otp")
       await new Promise(resolve => setTimeout(resolve, 1500));
       
     } catch (error) {
@@ -43,7 +46,7 @@ const ForgetPasswordPage = () => {
 
       <div className="absolute inset-0 bg-black/10" />
 
-      <div className="relative z-10 min-h-screen w-full flex items-center justify-end right-10 p-4">
+       <div className="relative z-10 min-h-screen w-full flex items-center justify-end lg:pr-20 md:pr-10 px-4 max-[500px]:justify-center max-[500px]:px-4 max-[400px]:px-3 max-[350px]:px-2">
         <AuthForm
           heading="Forget Password"
           subheading="Reset your password by email link and set a new one securely."
@@ -67,6 +70,7 @@ const ForgetPasswordPage = () => {
           bottomLinkText="Contact Support"
           bottomLink="/support"
           isLoading={isLoading}
+           className="max-[500px]:scale-90 max-[400px]:scale-75 max-[320px]:scale-65"
         />
       </div>
     </div>

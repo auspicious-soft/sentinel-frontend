@@ -1,79 +1,10 @@
-// "use client"
-
-
-// // ADMIN  FIELD_REP QA CLIENT_ADMIN CLIENT_USER
-// import { GlobalButton } from "@/components/Buttons/GlobalButton";
-// import { useRouter } from "next/navigation";
-
-
-// export type UserRole =
-//   | "ADMIN"
-//   | "FIELD_REP"
-//   | "QA"
-//   | "CLIENT_ADMIN"
-//   | "CLIENT_USER";
-
-
-// const page = () =>{
-  
-//   const router = useRouter()
-
-
-// // let role = "FIELD_REP"
-
-//   const handleLogin = () =>{
-//     try {
-//       // if(role === "ADMIN"){
-//       // router.push("/admin/dashboard")
-//       // }
-//       // else if(role === "FIELD_REP"){
-//       //    router.push("/field-rep/dashboard")
-//       // }
-//       //  else if(role === "QA"){
-//       //    router.push("/QA/dashboard")
-//       // }
-//       //  else if(role === "CLIENT_ADMIN"){
-//       //    router.push("/client-administrator/dashboard")
-//       // }
-//       //  else if(role === "CLIENT_USER"){
-//       //    router.push("/client-user/dashboard")
-//       // }
-//       // else{
-//       //   console.log("Invalid Role")
-//       // }
-//        router.push("/admin/dashboard")
-//     } catch (error) {
-      
-//     }
-//   }
-//   return(
-//     <>
-//     <div className="w-full h-full flex center flex-col gap-10 items-center ">
-//     <span className="text-center">Login Screen</span>
-
-// <div className="w-sm">
-//     <GlobalButton
-//     text="Login"
-//     onClick={handleLogin}
-//     className=""
-//     />
-// </div>
-//     </div>
-//     </>
-//   )
-// }
-
-// export default page;
-
-
-
-
 "use client"
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import loginBg from '../../public/images/mainBG.png';
 import { AuthForm } from '@/components/Forms/AuthForm';
+import loginBg from '../../public/images/mainBG.png';
+import logo from '../../public/images/logo1.png';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -96,7 +27,7 @@ const LoginPage = () => {
       // Example: Store user data after successful login
       // localStorage.setItem('userName', 'Bruce');
       // localStorage.setItem('userRole', 'ADMIN');
-      // router.push('/admin/dashboard');
+      router.push('/admin/dashboard');
       
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
@@ -110,6 +41,7 @@ const LoginPage = () => {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
+      {/* Background Image */}
       <Image
         src={loginBg}
         alt="Login Background"
@@ -119,10 +51,13 @@ const LoginPage = () => {
         quality={100}
       />
 
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/10" />
 
-      <div className="relative z-10 min-h-screen w-full flex items-center justify-end right-10 p-4">
+      {/* Auth Form Container */}
+    <div className="relative z-10 min-h-screen w-full flex items-center justify-end lg:pr-20 md:pr-10 px-4 max-[500px]:justify-center max-[500px]:px-4 max-[400px]:px-3 max-[350px]:px-2">
         <AuthForm
+          logoSrc={logo}
           heading="Login To Your Account"
           subheading="Sign in with email and password to securely access your account."
           fields={[
@@ -155,6 +90,7 @@ const LoginPage = () => {
           bottomLinkText="Contact Support"
           bottomLink="/support"
           isLoading={isLoading}
+         className="max-[500px]:scale-90 max-[400px]:scale-75 max-[320px]:scale-65"
         />
       </div>
     </div>
