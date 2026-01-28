@@ -3,6 +3,7 @@ import { TABLE_VALUES } from "@/styles/assets";
 import Image from "next/image";
 import React, { useState } from "react";
 import eyeIcon from "../../../../public/icons/eye1.svg";
+import deleteIcon from "../../../../public/icons/redDelete.svg";
 
 export const ActionEyeCell: React.FC<{ onClick?: () => void }> = ({
   onClick,
@@ -21,6 +22,23 @@ export const ActionEyeCell: React.FC<{ onClick?: () => void }> = ({
   );
 };
 
+export const DeleteEyeCell: React.FC<{ onClick?: () => void }> = ({
+  onClick,
+}) => {
+  return (
+    <div className="flex justify-center items-center">
+      <button
+        onClick={onClick}
+        className="w-8 h-8 px-4 py-2 rounded-lg outline-1 outline-primary-red backdrop-blur-[2.50px] flex justify-center items-center gap-2 cursor-pointer"
+      >
+        <div className="w-4 h-4 absolute overflow-hidden">
+          <Image src={deleteIcon} alt={"delete"} width={16} height={16} />
+        </div>
+      </button>
+    </div>
+  );
+};
+
 // 2. Delete/Restore Action Cell
 export const ActionTextCell: React.FC<{
   text: string;
@@ -31,7 +49,7 @@ export const ActionTextCell: React.FC<{
   return (
     <button
       onClick={onClick}
-      className={`text-xs cursor-pointer font-medium ${underline ? "underline" : ""}`}
+      className={`text-sm font-medium cursor-pointer font-['Plus_Jakarta_Sans'] ${underline ? "underline" : ""}`}
       style={{ color }}
     >
       {text}

@@ -100,7 +100,7 @@ export const NewAssignmentTable = <T extends Record<string, any>>({
     {
       key: "finalReview",
       header: "Final Review",
-      width: "110px",
+      width: "150px",
       render: (_: any, row: T) => (
         <ActionTextCell 
           text="Send To Final Review" 

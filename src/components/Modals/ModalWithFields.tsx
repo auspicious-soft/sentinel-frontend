@@ -51,7 +51,6 @@ export const FieldModal: React.FC<FieldModalProps> = ({
 }) => {
   const renderField = (field: FieldConfig, index: number) => {
     const commonProps = {
-      key: index,
       name: field.name,
       label: field.label,
       placeholder: field.placeholder,
@@ -64,6 +63,7 @@ export const FieldModal: React.FC<FieldModalProps> = ({
         return (
           <InputField
             {...commonProps}
+             key={index}
             value={field.value as string}
             onChange={field.onChange}
           />
@@ -73,28 +73,34 @@ export const FieldModal: React.FC<FieldModalProps> = ({
         return (
           <DropdownField
             {...commonProps}
+             key={index}
             value={field.value as string}
             onChange={field.onChange}
             options={field.options}
           />
         );
 
-      case 'checkbox':
-        return (
-          <CheckboxField
-            key={index}
-            name={field.name}
-            label={field.label}
-            checked={field.value as boolean}
-            onChange={field.onChange}
-            disabled={field.disabled}
-          />
-        );
+    case 'checkbox':
+  return (
+    <CheckboxField
+      key={index}
+      name={field.name}
+      label={field.label}
+      checked={field.value as boolean}
+      onChange={(e) => {
+        if (field.onChange) {
+          field.onChange(e);
+        }
+      }}
+      disabled={field.disabled}
+    />
+  );
 
       case 'textarea':
         return (
           <TextAreaField
             {...commonProps}
+             key={index}
             value={field.value as string}
             onChange={field.onChange}
             rows={field.rows}
@@ -105,6 +111,7 @@ export const FieldModal: React.FC<FieldModalProps> = ({
         return (
           <DateField
             {...commonProps}
+             key={index}
             value={field.value as string}
             onChange={field.onChange}
             min={field.min}
@@ -131,7 +138,7 @@ export const FieldModal: React.FC<FieldModalProps> = ({
 
   return (
     <div
-      className={`w-full max-w-xl p-7 bg-white rounded-[30px] inline-flex flex-col justify-start items-center gap-7 ${className}`}
+className={`w-full max-w-xl p-7 max-[500px]:p-5 max-[350px]:p-4 mx-4 max-[500px]:mx-3 max-[350px]:mx-2 bg-white rounded-[30px] max-[500px]:rounded-[20px] inline-flex flex-col justify-start items-center gap-7 max-[500px]:gap-5 ${className}`}
     >
       <div className="self-stretch flex flex-col justify-start items-center gap-5">
         {icon && (
