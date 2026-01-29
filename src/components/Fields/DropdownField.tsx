@@ -33,7 +33,7 @@ export const DropdownField: React.FC<DropdownFieldProps> = ({
   name,
 }) => {
   return (
-    <div className={`self-stretch flex flex-col justify-start items-start gap-1.25 ${className}`}>
+    <div className={`self-stretch flex flex-col justify-start items-start gap-1.25   ${className}`}>
       {label && (
         <label className={FORM_LABELS}>
           {label}
@@ -41,7 +41,7 @@ export const DropdownField: React.FC<DropdownFieldProps> = ({
         </label>
       )}
       <div
-        className={`self-stretch px-3.5 py-2.5 rounded-[10px] border border-[#E9E9E9] inline-flex justify-between items-center relative ${dropdownHeight ? `h-${dropdownHeight}` : "h-14"}
+        className={`self-stretch px-3.5 py-2.5 rounded-[10px] border border-[#E9E9E9] inline-flex justify-between items-center relative  ${dropdownHeight ? `h-${dropdownHeight}` : "h-14"}
           ${disabled ? 'bg-zinc-100 cursor-not-allowed' : 'bg-white'}
         `}
       >
@@ -53,7 +53,8 @@ export const DropdownField: React.FC<DropdownFieldProps> = ({
           required={required}
           className={`w-full bg-transparent outline-none appearance-none ${FORM_PLACEHOLDER_VAL} ${
             !value ? 'text-Placeholder' : ''
-          }`}
+          } ${disabled ? "cursor-not-allowed" : ""}`
+        }
         >
           <option value="" disabled>
             {placeholder}

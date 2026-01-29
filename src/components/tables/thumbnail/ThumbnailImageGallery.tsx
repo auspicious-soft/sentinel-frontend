@@ -14,22 +14,21 @@ export const ThumbnailImageGallery: React.FC<ThumbnailImageGalleryProps> = ({
 }) => {
   if (!images || images.length === 0) {
     return (
-      <div className="p-4 text-center text-gray-500">
-        No images available
-      </div>
+      <div className="p-4 text-center text-gray-500">No images available</div>
     );
   }
 
   return (
     <div className="p-4 bg-gray-50 border-t border-gray-200">
       <div className="flex flex-col gap-3">
-        <div 
+        <div
           className="
             w-full 
-            min-w-[800px] 
-            h-[140px] /
+            min-w-75 
+           h-35 
             overflow-x-auto 
             overflow-y-hidden 
+            flex-wrap
           "
         >
           {/* Inner container that holds all images - it can be wider than parent */}
@@ -48,7 +47,7 @@ export const ThumbnailImageGallery: React.FC<ThumbnailImageGalleryProps> = ({
                   group
                 "
               >
-                {typeof img === 'string' ? (
+                {typeof img === "string" ? (
                   <Image
                     src={img}
                     alt={`Inspection image ${idx + 1}`}
@@ -67,15 +66,10 @@ export const ThumbnailImageGallery: React.FC<ThumbnailImageGalleryProps> = ({
                     priority={idx < 3}
                   />
                 )}
-                
-               
-            
               </div>
             ))}
           </div>
         </div>
-        
-
       </div>
     </div>
   );

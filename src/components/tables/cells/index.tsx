@@ -6,7 +6,13 @@ import eyeIcon from "../../../../public/icons/eye1.svg";
 import deleteIcon from "../../../../public/icons/redDelete.svg";
 import pencilIcon from "../../../../public/icons/pencil.svg";
 import galleryIcon from "../../../../public/icons/gallery.svg";
+import assign from "../../../../public/icons/assigningLogo.svg";
 import { DropdownField } from "@/components/Fields/DropdownField";
+import { CustomRadio } from "@/components/Fields/CustomRadio";
+import { InputField } from "@/components/Fields/InputField";
+
+type EditMode = "cost" | "commission" | null;
+
 
 export const ActionEyeCell: React.FC<{ onClick?: () => void }> = ({
   onClick,
@@ -36,6 +42,23 @@ export const DeleteEyeCell: React.FC<{ onClick?: () => void }> = ({
       >
         <div className="w-4 h-4 absolute overflow-hidden">
           <Image src={deleteIcon} alt={"delete"} width={16} height={16} />
+        </div>
+      </button>
+    </div>
+  );
+};
+
+export const ReAssignEye: React.FC<{ onClick?: () => void }> = ({
+  onClick,
+}) => {
+  return (
+    <div className="flex justify-center items-center">
+      <button
+        onClick={onClick}
+        className="w-8 h-8 px-2 py-2 rounded-lg bg-primary-red backdrop-blur-[2.50px] flex justify-center items-center gap-2 cursor-pointer"
+      >
+        <div className="w-6 h-6 absolute overflow-hidden">
+          <Image src={assign} alt={"assign"} width={30} height={30} />
         </div>
       </button>
     </div>
@@ -163,15 +186,16 @@ export const TextWithLinkCell: React.FC<{
   text: string;
   linkText?: string;
   linkColor?: string;
+  underline?:boolean;
   onLinkClick?: () => void;
-}> = ({ text, linkText, linkColor = "#9D2137", onLinkClick }) => {
+}> = ({ text, linkText, linkColor = "#9D2137", onLinkClick, underline=false }) => {
   return (
-    <div className="flex flex-col">
+    <div className={`flex flex-col ${underline ? "underline" : ""} `}>
       <span className={`${TABLE_VALUES}`}>{text}</span>
       {linkText && (
         <button
           onClick={onLinkClick}
-          className="text-sm font-normal underline leading-8"
+          className="text-sm font-normal  leading-8"
           style={{ color: linkColor }}
         >
           {linkText}
@@ -232,58 +256,75 @@ export const DualActionCell: React.FC<{
 
 export const InspectionCostCell: React.FC<{
   currentCost: number;
+  editMode: EditMode;
+  onModeChange: (mode: EditMode) => void;
   onCostChange: (newCost: number) => void;
-  onEditToggle: (field: "cost" | "commission", checked: boolean) => void;
-  editCost?: boolean;
-  editCommission?: boolean;
 }> = ({
   currentCost,
+  editMode,
+  onModeChange,
   onCostChange,
-  onEditToggle,
-  editCost = false,
-  editCommission = false,
 }) => {
-  const [tempCost, setTempCost] = useState<string>(currentCost.toString());
+  const [tempCost, setTempCost] = React.useState(
+    currentCost.toFixed(2)
+  );
+
+  const isEditCost = editMode === "cost";
 
   return (
-    <div className="flex flex-col gap-2 p-2">
-      {/* Checkboxes */}
-      <div className="flex gap-4">
-        <label className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            checked={editCost}
-            onChange={(e) => onEditToggle("cost", e.target.checked)}
-            className="w-4 h-4"
-          />
-          <span className="text-xs">Edit Insp Cost</span>
-        </label>
-        <label className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            checked={editCommission}
-            onChange={(e) => onEditToggle("commission", e.target.checked)}
-            className="w-4 h-4"
-          />
-          <span className="text-xs">Field Rep Comm</span>
-        </label>
+    <div className="w-72 p-2 inline-flex flex-col gap-2">
+      {/* TOP RADIO GROUP */}
+      <div className="flex gap-7">
+        <CustomRadio
+          checked={editMode === "cost"}
+          label="Edit Insp Cost"
+          onChange={() => onModeChange("cost")}
+        />
+
+        <CustomRadio
+          checked={editMode === "commission"}
+          label="Field Rep Comm"
+          onChange={() => onModeChange("commission")}
+        />
       </div>
 
-      {/* Cost Input */}
-      <div className="flex items-center gap-2">
-        <span className="text-sm">Current Cost (${currentCost})</span>
-        {editCost && (
-          <>
-            <input
-              type="number"
-              value={tempCost}
-              onChange={(e) => setTempCost(e.target.value)}
-              onBlur={() => onCostChange(parseFloat(tempCost) || currentCost)}
-              className="w-20 px-2 py-1 border rounded text-sm"
-              placeholder="Amount"
-            />
-          </>
-        )}
+      <div className="flex items-center gap-4">
+        <span className="text-sm font-medium text-Paragraph">
+          Current cost (${currentCost.toFixed(2)})
+        </span>
+
+        <div className="flex items-center gap-1.5">
+          <div
+            onClick={() => onModeChange("cost")}
+            className={`
+              w-4 h-4 rounded-full border
+              ${
+                isEditCost
+                  ? "border-primary-red"
+                  : "border-Placeholder"
+              }
+              cursor-pointer
+            `}
+          />
+
+          <InputField
+            type="number"
+            placeholder="$"
+            value={tempCost}
+            disabled={!isEditCost}
+            onChange={(e) => setTempCost(e.target.value)}
+            className={`
+              w-20 px-2 py-1 text-[10px]
+              ${
+                isEditCost
+                  ? "outline-Input"
+                  : "text-Placeholder cursor-not-allowed"
+              }
+            `}
+            customHeight="8"
+            customBorder="Input"
+          />
+        </div>
       </div>
     </div>
   );
@@ -296,11 +337,11 @@ export const TripleTextCell: React.FC<{
   linkColor?: string;
 }> = ({ texts, underlineAll = false, linkColor = "#9D2137" }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col justify-center align-middle">
       {texts.map((text, index) => (
         <span
           key={index}
-          className={`text-sm ${underlineAll ? "underline" : ""}`}
+          className={`text-sm text-center ${underlineAll ? "underline" : ""}`}
           style={underlineAll ? { color: linkColor } : {}}
         >
           {text}
@@ -335,22 +376,31 @@ export const IconActionsCell: React.FC<{
   return (
     <div className="flex gap-3">
       {onView && (
-        <button onClick={onView} className="text-blue-600 hover:text-blue-800">
-          👁️
+        <button onClick={onView}  className="w-8 h-8 px-2 py-2 rounded-lg bg-primary-red backdrop-blur-[2.50px] flex justify-center items-center gap-2 cursor-pointer"
+      >
+                   <Image src={pencilIcon} alt={"assign"} width={16} height={16} />
+
         </button>
       )}
       {onEdit && (
         <button
           onClick={onEdit}
-          className="text-green-600 hover:text-green-800"
-        >
-          ✏️
+           className="w-8 h-8 px-2 py-2 rounded-lg bg-primary-red backdrop-blur-[2.50px] flex justify-center items-center gap-2 cursor-pointer"
+      >
+          <Image src={galleryIcon} alt={"assign"} width={16} height={16} />
         </button>
       )}
       {onDelete && (
-        <button onClick={onDelete} className="text-red-600 hover:text-red-800">
-          🗑️
-        </button>
+         <div className="flex justify-center items-center">
+      <button
+        onClick={onDelete}
+        className="w-8 h-8 px-4 py-2 rounded-lg outline-1 outline-primary-red backdrop-blur-[2.50px] flex justify-center items-center gap-2 cursor-pointer"
+      >
+        <div className="w-4 h-4 absolute overflow-hidden">
+          <Image src={deleteIcon} alt={"delete"} width={16} height={16} />
+        </div>
+      </button>
+    </div>
       )}
     </div>
   );

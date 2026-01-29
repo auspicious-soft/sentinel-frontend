@@ -1,10 +1,8 @@
-// components/tables/InReviewTable.tsx
 "use client";
 
 import React from "react";
 import { TableWrapper } from "./TableWrapper";
-import { TABLE_VALUES } from "@/styles/assets";
-import { ActionEyeCell, DualActionTextCell, TextWithLinkCell } from "./cells";
+import {  DualActionTextCell, TextWithLinkCell } from "./cells";
 import { StaticImageData } from "next/image";
 
 interface InReviewRow {
@@ -104,7 +102,7 @@ export const InReviewTable: React.FC<InReviewTableProps> = ({
       width: "150px",
       sortable: true,
       render: (_: any, row: InReviewRow) => (
-        <TextWithLinkCell text={row.qa || ""} linkColor="#464646" />
+        <TextWithLinkCell text={row.qa || ""} linkColor="#464646" underline={true} />
       ),
     },
   ];

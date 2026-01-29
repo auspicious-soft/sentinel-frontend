@@ -1,37 +1,23 @@
 import { BaseTable } from "./BaseTable";
+import { ReAssignEye } from "./cells";
 
-export const OutstandingMonitorTaskTable = <T extends Record<string, any>>({
+export const ReAssignTable = <T extends Record<string, any>>({
   data,
   selectedRows,
   onRowSelect,
-
+onView
 }: {
   data: T[];
   selectedRows?: (string | number)[];
   onRowSelect?: (ids: (string | number)[]) => void;
   onView?: (row: T) => void;
-  onApprove?: (row: T) => void;
-  onSendToFinalReview?: (row: T) => void;
-  onSendToQA?: (row: T) => void;
-  onFieldRepClick?: (row: T) => void; 
 }) => {
   const columns = [
     {
       key: "name",
       header: "Name",
-      width: "flex-1",
+      width: "150px",
       sortable: true,
-    },
-    {
-      key: "inspectionType",
-      header: "Inspection Type",
-  width: "flex-1",
-        sortable: true,
-      render: (_: any, row: T) => (
-        <span className="text-sm font-normal underline text-Paragraph">
-          {row.inspectionType}
-        </span>
-      ),
     },
     {
       key: "status",
@@ -49,19 +35,6 @@ export const OutstandingMonitorTaskTable = <T extends Record<string, any>>({
         </div>
       ),
     },
-   
-    {
-      key: "requestDate",
-      header: "RequestDate",
-      width: "flex-1",
-      sortable: true,
-    },
-    {
-      key: "coId",
-      header: "Co Id",
-       width: "flex-1",
-      sortable: true,
-    },
      {
       key: "address",
       header: "Address",
@@ -74,29 +47,36 @@ export const OutstandingMonitorTaskTable = <T extends Record<string, any>>({
       sortable: true,
     },
     {
-      key: "country",
-      header: "Country",
-      width: "56px",
-      sortable: true,
-    },
-    {
       key: "state",
       header: "State",
       width: "56px",
       sortable: true,
     },
-    {
-      key: "repId",
-      header: "Rep Id",
-      width: "56px",
+      {
+      key: "requestDate",
+      header: "Request Date",
+      width: "150px",
       sortable: true,
     },
-    {
-      key: "repName",
-      header: "Rep Name",
-      width: "136px",
-      sortable: true,
+     {
+      key: "inspectionType",
+      header: "Inspection Type",
+  width: "50px",
+        sortable: true,
+      render: (_: any, row: T) => (
+        <span className="text-sm font-normal underline text-Paragraph">
+          {row.inspectionType}
+        </span>
+      ),
     },
+    {
+         key: "action",
+         header: "Action",
+         width: "56px",
+        render: (_: any, row: T) => ( // ← Make sure row is passed here
+           <ReAssignEye onClick={() => onView?.(row)} />
+         ),
+       },
    
   ];
 

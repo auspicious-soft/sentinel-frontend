@@ -11,6 +11,8 @@ interface InputFieldProps {
   required?: boolean;
   className?: string;
   name?: string;
+  customHeight?:string;
+  customBorder?:string;
 }
 
 export const InputField: React.FC<InputFieldProps> = ({
@@ -23,6 +25,8 @@ export const InputField: React.FC<InputFieldProps> = ({
   required = false,
   className = '',
   name,
+  customHeight = '14',
+  customBorder = ''
 }) => {
   return (
     <div className={`self-stretch flex flex-col justify-start items-start gap-2 ${className}`}>
@@ -33,7 +37,7 @@ export const InputField: React.FC<InputFieldProps> = ({
         </label>
       )}
       <div
-        className={`self-stretch h-14 px-3.5 py-2.5 rounded-[10px] outline  outline-zinc-100 inline-flex justify-start items-center gap-2.5
+        className={`self-stretch ${customHeight ? `h-${customHeight}` : "h-14"}  px-3.5 py-2.5 rounded-[10px] ${customBorder ? `border border-${customBorder}` : "outline  outline-zinc-100" } inline-flex justify-start items-center gap-2.5
           ${disabled ? 'bg-zinc-100 cursor-not-allowed' : 'bg-white'}
         `}
       >

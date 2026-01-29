@@ -1,10 +1,12 @@
-// components/tables/FinalReviewTable.tsx
 "use client";
 
 import React, { useState } from "react";
 import { TableWrapper } from "./TableWrapper";
 import { TABLE_VALUES } from "@/styles/assets";
-import { DropdownCell, InspectionCostCell, TripleTextCell } from "./cells";
+import { DropdownCell, DualActionTextCell, InspectionCostCell, TripleTextCell } from "./cells";
+import { StaticImageData } from "next/image";
+
+type EditMode = "cost" | "commission" | null;
 
 interface FinalReviewRow {
   id: string | number;
@@ -21,11 +23,11 @@ interface FinalReviewRow {
   repId: string;
   repName: string;
   inspectionCost: number;
-  editCost?: boolean;
-  editCommission?: boolean;
-  images?: string[];
+  images?: (string | StaticImageData)[];
   isRush?: boolean;
   isDuplicate?: boolean;
+ editMode?: EditMode;
+  qa?:string;
 }
 
 interface FinalReviewTableProps {
@@ -33,11 +35,7 @@ interface FinalReviewTableProps {
   selectedRows?: (string | number)[];
   onRowSelect?: (ids: (string | number)[]) => void;
   onCostChange?: (rowId: string | number, newCost: number) => void;
-  onEditToggle?: (
-    rowId: string | number,
-    field: "cost" | "commission",
-    checked: boolean,
-  ) => void;
+ onEditToggle?: (rowId: string | number, mode: EditMode) => void;
   statusOptions: { label: string; value: string }[];
   onStatusChange?: (rowId: string | number, status: string) => void;
   thumbnailMode?: boolean;
@@ -66,33 +64,34 @@ export const FinalReviewTable: React.FC<FinalReviewTableProps> = ({
     onCostChange?.(rowId, newCost);
   };
 
-  const handleEditToggle = (
-    rowId: string | number,
-    field: "cost" | "commission",
-    checked: boolean,
-  ) => {
-    onEditToggle?.(rowId, field, checked);
-  };
+ 
+
+const handleEditModeChange = (
+  rowId: string | number,
+  mode: EditMode
+) => {
+  onEditToggle?.(rowId, mode);
+};
 
   const columns = [
     {
       key: "coId",
       header: "Co Id",
-      width: "54px",
+      width: "94px",
       sortable: true,
     },
-      {
+    {
       key: "address",
       header: "Name/Address",
-      width: "288px",
+      width: "230px",
       render: (_: any, row: FinalReviewRow) => (
-        <div className="flex flex-col">
-          <span className={`${TABLE_VALUES}`}>{row.name}</span>
+        <div className="flex flex-col ">
+          <span className={`${TABLE_VALUES}`}>{`${row.name }`}</span>
           <span className={`${TABLE_VALUES}`}>{row.address}</span>
         </div>
       ),
     },
-     {
+    {
       key: "city",
       header: "City",
       width: "100px",
@@ -101,7 +100,7 @@ export const FinalReviewTable: React.FC<FinalReviewTableProps> = ({
     {
       key: "inspectionType",
       header: "Insp. Type",
-      width: "40px",
+      width: "130px",
       sortable: true,
       render: (_: any, row: FinalReviewRow) => (
         <span className=" underline text-Paragraph">{row.inspectionType}</span>
@@ -120,8 +119,7 @@ export const FinalReviewTable: React.FC<FinalReviewTableProps> = ({
         />
       ),
     },
-  
- 
+
     {
       key: "inspectionCost",
       header: "Inspection Cost",
@@ -129,22 +127,50 @@ export const FinalReviewTable: React.FC<FinalReviewTableProps> = ({
       render: (_: any, row: FinalReviewRow) => (
         <InspectionCostCell
           currentCost={row.inspectionCost}
-          onCostChange={(newCost) => handleCostChange(row.id, newCost)}
-          onEditToggle={(field, checked) =>
-            handleEditToggle(row.id, field, checked)
-          }
-          editCost={row.editCost || false}
-          editCommission={row.editCommission || false}
+          editMode={row.editMode ?? null}
+           onModeChange={(mode) => handleEditModeChange(row.id, mode)}
+  onCostChange={(newCost) => handleCostChange(row.id, newCost)}
         />
       ),
     },
+     {
+          key: "qa",
+          header: "Quality Rep",
+          width: "164px",
+          sortable: true,
+          render: (_: any, row: FinalReviewRow) => (
+            <DualActionTextCell
+              primaryText={row.qa || ""}
+              secondaryText="Return To QA"
+              primaryTextColor={"text-[#464646]"}
+              secondaryTextColor={"text-[#9D2137]"}
+              secondayUnderline={true}
+            />
+          ),
+        },
+         {
+              key: "repName",
+              header: "Field Rep",
+              width: "164px",
+              sortable: true,
+              render: (_: any, row: FinalReviewRow) => (
+                <DualActionTextCell
+                  primaryText={row.repName}
+                  secondaryText="Return To Field Rep"
+                  primaryTextColor={"text-[#464646]"}
+                  secondaryTextColor={"text-[#9D2137]"}
+                  secondayUnderline={true}
+                />
+              ),
+            },
+            
     {
       key: "repDetails",
-      header: "Rep Details",
+      header: "Change Insp Request",
       width: "200px",
       render: (_: any, row: FinalReviewRow) => (
         <TripleTextCell
-          texts={[row.repName, `ID: ${row.repId}`, row.zip]}
+          texts={["Edit Forms", "View Uploads", "Change Inspection Request"]}
           underlineAll={true}
           linkColor="#9D2137"
         />
