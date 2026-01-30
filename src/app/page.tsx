@@ -86,9 +86,9 @@ const LoginPage = () => {
           showForgotPassword={true}
           forgotPasswordText="Forgot Password?"
           forgotPasswordLink="/forgot-password"
-          bottomText="Have Issues?"
-          bottomLinkText="Contact Support"
-          bottomLink="/support"
+          // bottomText="Have Issues?"
+          // bottomLinkText="Contact Support"
+          // bottomLink="/support"
           isLoading={isLoading}
          className="max-[500px]:scale-90 max-[400px]:scale-75 max-[320px]:scale-65"
         />
