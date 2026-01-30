@@ -167,7 +167,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
           {bottomLinkText && bottomLink && (
             <Link
               href={bottomLink}
-              className="text-zinc-700 text-sm max-[350px]:text-xs font-medium font-['Plus_Jakarta_Sans'] underline hover:no-underline"
+              className="text-primary-blue text-sm max-[350px]:text-xs font-medium font-['Plus_Jakarta_Sans'] underline hover:no-underline"
             >
               {bottomLinkText}
             </Link>
