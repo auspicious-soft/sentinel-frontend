@@ -1,12 +1,7 @@
 import React from "react";
-import { BaseTable } from "./BaseTable";
-import {
-  ActionEyeCell,
-  ActionTextCell,
-  DualActionCell,
-  DualActionTextCell,
-  StatusBadgeCell,
-} from "./cells";
+import { ActionTextCell } from "../cells";
+import { BaseTable } from "../BaseTable";
+
 
 export const NewAssignmentTable = <T extends Record<string, any>>({
   data,

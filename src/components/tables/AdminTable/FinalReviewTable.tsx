@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { TableWrapper } from "./TableWrapper";
 import { TABLE_VALUES } from "@/styles/assets";
-import { DropdownCell, DualActionTextCell, InspectionCostCell, TripleTextCell } from "./cells";
 import { StaticImageData } from "next/image";
+import { DropdownCell, DualActionTextCell, InspectionCostCell, TripleTextCell } from "../cells";
+import { TableWrapper } from "../TableWrapper";
 
 type EditMode = "cost" | "commission" | null;
 

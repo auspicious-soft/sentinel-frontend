@@ -2,11 +2,11 @@
 import { AddButton } from "@/components/Buttons/AddButton";
 import { SearchInput } from "@/components/Buttons/InputSearch";
 import { FieldModal } from "@/components/Modals/ModalWithFields";
-import { NewAssignmentTable } from "@/components/tables/NewAssignmentTable";
 import { TAB_HEADER } from "@/styles/assets";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import assigning from "../../../../public/icons/assigning.png";
+import { NewAssignmentTable } from "@/components/tables/AdminTable/NewAssignmentTable";
 const NewAssignments = () => {
   const router = useRouter();
   const [search, setSearch] = useState("");

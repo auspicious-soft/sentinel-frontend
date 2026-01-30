@@ -2,8 +2,8 @@
 
 import { GlobalButton } from "@/components/Buttons/GlobalButton";
 import { DropdownField } from "@/components/Fields/DropdownField";
-import { OutstandingMonitorTaskTable } from "@/components/tables/OutstangMonitorTaskTable";
-import { ReAssignTable } from "@/components/tables/ReassignTable";
+import { ReAssignTable } from "@/components/tables/AdminTable/ReassignTable";
+
 import { DIV_HEAD, TAB_HEADER } from "@/styles/assets";
 import { useState } from "react";
 

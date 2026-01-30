@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import deleteIcon from "../../../../public/icons/redDelete.svg";
-import { FieldRepTable } from "@/components/tables/FieldRepTable";
+import { FieldRepTable } from "@/components/tables/AdminTable/FieldRepTable";
 
 const FieldReps = () => {
   const router = useRouter();

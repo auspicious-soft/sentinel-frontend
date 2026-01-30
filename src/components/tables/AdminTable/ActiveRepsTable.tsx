@@ -1,8 +1,9 @@
 import React from "react";
-import { BaseTable } from "./BaseTable";
-import { ActionTextCell } from "./cells";
+import { DeleteEyeCell } from "../cells";
+import { BaseTable } from "../BaseTable";
 
-export const DeletedRepsTable = <T extends Record<string, any>>({
+
+export const ActiveRepsTable = <T extends Record<string, any>>({
   data,
   onView,
 }: {
@@ -35,15 +36,17 @@ export const DeletedRepsTable = <T extends Record<string, any>>({
       sortable: true,
     },
     {
+      key: "finalReview",
+      header: "Final Review ?",
+      width: "flex-1",
+      sortable: true,
+    },
+    {
       key: "action",
       header: "Action",
       width: "56px",
      render: (_: any, row: T) => (
-        <ActionTextCell 
-    text="Restore"
-        onClick={() => onView?.(row)} 
-        underline={true}
-        />
+        <DeleteEyeCell onClick={() => onView?.(row)} />
       ),
     },
   ];

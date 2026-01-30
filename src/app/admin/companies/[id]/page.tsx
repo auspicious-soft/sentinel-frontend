@@ -2,7 +2,7 @@
 
 import { AddButton } from "@/components/Buttons/AddButton";
 import { SearchInput } from "@/components/Buttons/InputSearch";
-import { CompanyUsers } from "@/components/tables/CompanyUsersTable";
+import { CompanyUsers } from "@/components/tables/AdminTable/CompanyUsersTable";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 

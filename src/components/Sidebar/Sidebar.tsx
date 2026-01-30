@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ChevronLeft, Menu, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Menu, X } from 'lucide-react';
 import logo from '../../../public/images/logo.png';
 
 // Import all icons
@@ -83,76 +83,112 @@ interface DynamicSidebarProps {
 }
 
 export const DynamicSidebar: React.FC<DynamicSidebarProps> = ({ role, className = '' }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isDesktopCollapsed, setIsDesktopCollapsed] = useState(false);
   const pathname = usePathname();
   const navItems = sidebarConfig[role] || [];
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
+  const toggleMobileSidebar = () => {
+    setIsMobileOpen(!isMobileOpen);
+  };
+
+  const toggleDesktopSidebar = () => {
+    setIsDesktopCollapsed(!isDesktopCollapsed);
   };
 
   return (
     <>
-      { !isOpen &&
-      <button
-        onClick={toggleSidebar}
-        className="lg:hidden sticky top-4 left-4 z-50 p-2 rounded-lg bg-primary-blue/10 self-start cursor-pointer"
-        aria-label="Toggle menu"
-      >
-        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6 text-Paragraph" />}
-      </button>
-      }
+      {/* Mobile Menu Button */}
+      {!isMobileOpen && (
+        <button
+          onClick={toggleMobileSidebar}
+          className="lg:hidden sticky top-4 left-1 z-50 p-2 rounded-lg bg-medium-blue self-start cursor-pointer"
+          aria-label="Toggle menu"
+        >
+          <Menu className="w-6 h-6 text-Paragraph" />
+        </button>
+      )}
 
-      {isOpen && (
+      {/* Mobile Backdrop */}
+      {isMobileOpen && (
         <div
           className="lg:hidden fixed inset-0 backdrop-blur-3xl z-30"
-          onClick={toggleSidebar}
+          onClick={toggleMobileSidebar}
         />
       )}
 
+      {/* Sidebar */}
       <div
         className={`
           fixed lg:sticky top-0 left-0 h-screen
-          px-3 bg-light-blue rounded-[10px]
-          transition-transform duration-300 ease-in-out
+          bg-light-blue rounded-[10px]
+          transition-all duration-300 ease-in-out
           z-40 
-          ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          ${isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          ${isDesktopCollapsed ? 'lg:w-20' : 'lg:w-auto'}
+          ${isDesktopCollapsed ? 'lg:px-2' : 'lg:px-3'}
+          px-3
           ${className}
         `}
       >
-        <div className="inline-flex flex-col justify-start items-start gap-5 h-full">
-          <div className="self-stretch inline-flex justify-between items-center ">
+        <div className="inline-flex flex-col justify-start items-start gap-5 h-full w-full">
+          {/* Header */}
+          <div className={`self-stretch inline-flex items-center ${isDesktopCollapsed ? 'lg:justify-center lg:py-6' : ''} justify-between`}>
+            {/* Logo - Hidden when collapsed on desktop, always shown on mobile */}
             <Image
               src={logo}
               alt="Logo"
               width={211}
               height={75}
-              className="flex-1 h-20 object-contain mix-blend-multiply"
+              className={`flex-1 h-20 object-contain mix-blend-multiply ${isDesktopCollapsed ? 'lg:hidden' : ''}`}
               priority
             />
-            <div className='w-7 h-7'>
-            <ChevronLeft className='w-7 h-7'/>
-            </div>
+            
+            {/* Toggle Button - Desktop only */}
+            <button
+              onClick={toggleDesktopSidebar}
+              className="hidden lg:block w-7 h-7 hover:bg-primary-blue/10 rounded transition-colors cursor-pointer"
+              aria-label="Toggle sidebar"
+            >
+              {isDesktopCollapsed ? (
+                <ChevronRight className="w-7 h-7 text-Paragraph" />
+              ) : (
+                <ChevronLeft className="w-7 h-7 text-Paragraph" />
+              )}
+            </button>
+
+            {/* Close Button - Mobile only */}
+            <button
+              onClick={toggleMobileSidebar}
+              className="lg:hidden w-7 h-7"
+              aria-label="Close menu"
+            >
+              <X className="w-7 h-7 text-Paragraph cursor-pointer" />
+            </button>
           </div>
 
+          {/* Navigation Items */}
           <div className="flex flex-col justify-start items-start gap-2.5 overflow-y-auto flex-1 w-full scrollbar-hide">
             <div className="flex flex-col justify-start items-start w-full">
               {navItems.map((item, index) => {
-const isActive = pathname === item.path || pathname.startsWith(item.path + '/');
+                const isActive = pathname === item.path || pathname.startsWith(item.path + '/');
                 return (
                   <Link
                     key={index}
                     href={item.path}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => setIsMobileOpen(false)}
                     className={`
-                      self-stretch px-4 py-2.5 rounded-lg inline-flex justify-start items-center gap-2.5
+                      self-stretch rounded-lg inline-flex items-center gap-2.5
                       transition-colors duration-200
+                      ${isDesktopCollapsed ? 'lg:justify-center lg:px-2 lg:py-2.5' : 'lg:justify-start lg:px-4 lg:py-2.5'}
+                      justify-start px-4 py-2.5
                       ${
                         isActive
                           ? 'bg-primary-blue text-white'
                           : 'text-Paragraph hover:bg-primary-blue/10'
                       }
                     `}
+                    title={isDesktopCollapsed ? item.label : undefined}
                   >
                     <div className="w-4 h-4 relative shrink-0">
                       <Image
@@ -166,6 +202,7 @@ const isActive = pathname === item.path || pathname.startsWith(item.path + '/');
                     <div
                       className={`
                         justify-start text-sm font-medium font-['Plus_Jakarta_Sans'] leading-8 whitespace-nowrap
+                        ${isDesktopCollapsed ? 'lg:hidden' : ''}
                         ${isActive ? 'text-white' : 'text-Paragraph'}
                       `}
                     >

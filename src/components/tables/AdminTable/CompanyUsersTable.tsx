@@ -1,5 +1,5 @@
 import React from "react";
-import { BaseTable } from "./BaseTable";
+import { BaseTable } from "../BaseTable";
 
 export const CompanyUsers = <T extends Record<string, any>>({
   data,

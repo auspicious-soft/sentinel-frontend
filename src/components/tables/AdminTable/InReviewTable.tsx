@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { TableWrapper } from "./TableWrapper";
-import {  DualActionTextCell, TextWithLinkCell } from "./cells";
 import { StaticImageData } from "next/image";
+import { DualActionTextCell, TextWithLinkCell } from "../cells";
+import { TableWrapper } from "../TableWrapper";
 
 interface InReviewRow {
   id: string | number;

@@ -2,10 +2,10 @@
 "use client";
 
 import React from "react";
-import { TableWrapper } from "./TableWrapper";
 import { TABLE_VALUES } from "@/styles/assets";
-import { DropdownCell, DualActionTextCell, EditDeleteCell } from "./cells";
 import { StaticImageData } from "next/image";
+import { DropdownCell, DualActionTextCell, EditDeleteCell } from "../cells";
+import { TableWrapper } from "../TableWrapper";
 
 
 interface AssignQARow {

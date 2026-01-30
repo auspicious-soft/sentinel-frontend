@@ -5,12 +5,12 @@ import { NonBgButton } from "@/components/Buttons/NonBgButton";
 import { TAB_HEADER } from "@/styles/assets";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ActiveRepsTable } from "@/components/tables/ActiveRepsTable";
 import { FieldModal } from "@/components/Modals/ModalWithFields";
 import assignImg from "../../../../public/icons/user.png";
 import tickImg from "../../../../public/icons/tick.png";
-import { DeletedRepsTable } from "@/components/tables/DeletedRepsTable";
 import { NonFieldModal } from "@/components/Modals/NonFieldModal";
+import { ActiveRepsTable } from "@/components/tables/AdminTable/ActiveRepsTable";
+import { DeletedRepsTable } from "@/components/tables/AdminTable/DeletedRepsTable";
 
 const QualityReps = () => {
   const router = useRouter();

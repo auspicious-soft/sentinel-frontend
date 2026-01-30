@@ -1,6 +1,6 @@
 import React from "react";
-import { BaseTable } from "./BaseTable";
-import { ActionEyeCell } from "./cells";
+import { BaseTable } from "../BaseTable";
+import { ActionEyeCell } from "../cells";
 
 export const CompanyTable = <T extends Record<string, any>>({
   data,

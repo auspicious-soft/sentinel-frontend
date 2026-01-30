@@ -1,7 +1,7 @@
 "use client";
 import { AddButton } from "@/components/Buttons/AddButton";
 import { SearchInput } from "@/components/Buttons/InputSearch";
-import { CompanyTable } from "@/components/tables/CompanyTable";
+import { CompanyTable } from "@/components/tables/AdminTable/CompanyTable";
 import { TAB_HEADER } from "@/styles/assets";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

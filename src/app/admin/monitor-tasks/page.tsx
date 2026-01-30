@@ -5,16 +5,16 @@ import { TAB_HEADER } from "@/styles/assets";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { OutstandingMonitorTaskTable } from "@/components/tables/OutstangMonitorTaskTable";
 import { CheckboxField } from "@/components/Fields/CheckboxField";
 import { GlobalButton } from "@/components/Buttons/GlobalButton";
-import { AssignQATable } from "@/components/tables/AssignQATable";
-import { InReviewTable } from "@/components/tables/InReviewTable";
-import { FinalReviewTable } from "@/components/tables/FinalReviewTable";
 
 import logo from "../../../../public/images/mainBG.png"
 import { StaticImageData } from "next/image";
-import { CompletedTable } from "@/components/tables/CompletedTable";
+import { AssignQATable } from "@/components/tables/AdminTable/AssignQATable";
+import { CompletedTable } from "@/components/tables/AdminTable/CompletedTable";
+import { FinalReviewTable } from "@/components/tables/AdminTable/FinalReviewTable";
+import { InReviewTable } from "@/components/tables/AdminTable/InReviewTable";
+import { OutstandingMonitorTaskTable } from "@/components/tables/AdminTable/OutstangMonitorTaskTable";
 
 type EditMode = "cost" | "commission" | null;
 

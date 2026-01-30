@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { TableWrapper } from "./TableWrapper";
-import { DualActionTextCell, InspectionCostCell, TextWithLinkCell } from "./cells";
 import { StaticImageData } from "next/image";
+import { DualActionTextCell, InspectionCostCell } from "../cells";
+import { TableWrapper } from "../TableWrapper";
 
 type EditMode = "cost" | "commission" | null;
 

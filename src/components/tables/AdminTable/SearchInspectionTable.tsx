@@ -1,6 +1,5 @@
-import React from "react";
-import { BaseTable } from "./BaseTable";
-import { ActionEyeCell, IconActionsCell, StatusBadgeCell } from "./cells";
+import { BaseTable } from "../BaseTable";
+import { IconActionsCell, StatusBadgeCell } from "../cells";
 
 export const SearchInspectionTable = <T extends Record<string, any>>({
   data,
